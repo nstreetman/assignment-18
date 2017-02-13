@@ -1,3 +1,5 @@
+import $ from 'jquery'
+
 //modeled almost exactly after the routing warmup demo did by Travis 02/11, utilized the pushing to tables warmup also
 
 var pageContentObj = {
@@ -34,7 +36,7 @@ var pageContentObj = {
 						</thead>
 						<tbody>
 						<tr>
-					<td>Coming Soon!</td>
+					<td>${fetchConcertInfo.imageSource}</td>
 					</tr>
 				</tbody>
 
@@ -112,3 +114,5 @@ tabsContainerEl.addEventListener('click', function(evt){
 
 controllerRouter()
 window.addEventListener('hashchange', controllerRouter)
+let fetchConcertInfo = $.getJSON('http://apis.is/concerts')
+    console.log(fetchConcertInfo)
