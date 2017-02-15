@@ -1,3 +1,9 @@
+function forEach(arr, cb){
+	for(var i = 0; i < arr.length; i++){
+		cb(arr[i], i, arr)
+	}
+}
+
 import $ from 'jquery'
 
 //modeled almost exactly after the routing warmup demo did by Travis 02/11, utilized the pushing to tables warmup also
@@ -29,19 +35,18 @@ var pageContentObj = {
 				</table>
 					`,
 
-	concerts:  `
+	concerts: `
 				<table class =“table table-concerts”>
 					<thead>
-						<tr><h2>Concerts</h2></tr>
+						<tr><h2>${iteratedConcertInfo.imageSource}</h2></tr>
 						</thead>
 						<tbody>
 						<tr>
-					<td>${fetchConcertInfo.imageSource}</td>
+					<td>Mo' Concerts Please</td>
 					</tr>
 				</tbody>
-
 				</table>
-					`,
+				`,
 
 	carpools: `
 			<table class =“table table-carpools”>
@@ -88,8 +93,19 @@ function renderActiveTab(theCurrentRoute){
 function renderContentTo(domEl, theRoute, theContent){
 
 	if( theRoute === 'home' ){  return domEl.innerHTML = theContent[theRoute] }
-	if( theRoute === 'concerts' ){  return domEl.innerHTML = theContent[theRoute] }
+
+	if( theRoute === 'concerts' ){ $.getJSON('http://apis.is/concerts')
+			.then(function(serverRes)
+			{var concertContainerEl = document.querySelector('.page-content')
+				var concertObjectsList = serverRes.results
+				var iteratedConcertInfo = ' '
+				serverRes.results.forEach (function (results)
+			  {concertContainerEl.innerHTML = iteratedConcertInfo})
+				return domEl.innerHTML = theContent[theRoute] }
+			)
+			console.log(iteratedConcertInfo)
 	if( theRoute === 'carpools' ){ return  domEl.innerHTML = theContent[theRoute] }
+
 	if( theRoute === 'flights' ){  return domEl.innerHTML = theContent[theRoute] }
 
 	domEl.innerHTML = theContent.home
@@ -114,5 +130,3 @@ tabsContainerEl.addEventListener('click', function(evt){
 
 controllerRouter()
 window.addEventListener('hashchange', controllerRouter)
-let fetchConcertInfo = $.getJSON('http://apis.is/concerts')
-    console.log(fetchConcertInfo)
