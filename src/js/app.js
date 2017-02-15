@@ -35,19 +35,7 @@ var pageContentObj = {
 				</table>
 					`,
 
-	concerts: `
-				<table class =“table table-concerts”>
-					<thead>
-						<tr><h2>${iteratedConcertInfo.imageSource}</h2></tr>
-						</thead>
-						<tbody>
-						<tr>
-					<td>Mo' Concerts Please</td>
-					</tr>
-				</tbody>
-				</table>
-				`,
-
+	concerts: 'asdf',
 	carpools: `
 			<table class =“table table-carpools”>
 
@@ -92,26 +80,43 @@ function renderActiveTab(theCurrentRoute){
 
 function renderContentTo(domEl, theRoute, theContent){
 
+	console.log(theRoute)
 	if( theRoute === 'home' ){  return domEl.innerHTML = theContent[theRoute] }
 
-	if( theRoute === 'concerts' ){ $.getJSON('http://apis.is/concerts')
-			.then(function(serverRes)
-			{var concertContainerEl = document.querySelector('.page-content')
-				var concertObjectsList = serverRes.results
-				var iteratedConcertInfo = ' '
-				serverRes.results.forEach (function (results)
-			  {concertContainerEl.innerHTML = iteratedConcertInfo})
-				return domEl.innerHTML = theContent[theRoute] }
-			)
-			console.log(iteratedConcertInfo)
+	if( theRoute === 'concerts' ){
+		console.log(theRoute)
+		$.getJSON('http://apis.is/concerts')
+			.then(function(serverRes){
+				var htmlStr = `<div class="title-div">
+												<h1>Concerts</h1>
+											</div>
+				`
+				serverRes.results.forEach (function (singleObj){
+					console.log(singleObj)
+					// htmlStr += `<div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4>
+							htmlStr
+							htmlStr += `<div class="concert-image"><img src="${singleObj.imageSource}"></div>`
+							htmlStr += `<div class ="concert-name">${singleObj.name}</div>`
+							htmlStr += `<div class="concert-venue"><span class="venue-name">Venue: </span>${singleObj.eventHallName}</div>`
+							htmlStr += `<div class="concert-date">"${singleObj.dateOfShow}"</div>`
+											// </div>`
+										})
+
+
+
+				concertContainerEl.innerHTML = htmlStr
+		})
+
+
+				var concertContainerEl = document.querySelector('.page-content')
+	}
 	if( theRoute === 'carpools' ){ return  domEl.innerHTML = theContent[theRoute] }
 
 	if( theRoute === 'flights' ){  return domEl.innerHTML = theContent[theRoute] }
 
 	domEl.innerHTML = theContent.home
-	window.location.hash = ''
-}
 
+}
 var controllerRouter = function(){
 	var currentRoute = window.location.hash.slice(1)
 	if(currentRoute.length === 0){ currentRoute = 'home' }
