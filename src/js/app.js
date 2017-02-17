@@ -35,22 +35,9 @@ var pageContentObj = {
 				</table>
 					`,
 
-	concerts: 'asdf',
-	carpools: `
-			<table class =“table table-carpools”>
-
-				<thead>
-					<tr><h2>Carpools</h2></tr>
-				</thead>
-				<tbody>
-				<tr>
-					<td>Coming Soon!</td>
-
-				</tr>
-				</tbody>
-
-				</table>	`,
-
+	concerts: 'concerts',
+	carpools: 'carpool',
+	//
 	flights:  `
 				<table class =“table table-flights”>
 
@@ -110,9 +97,109 @@ function renderContentTo(domEl, theRoute, theContent){
 
 				var concertContainerEl = document.querySelector('.page-content')
 	}
-	if( theRoute === 'carpools' ){ return  domEl.innerHTML = theContent[theRoute] }
 
-	if( theRoute === 'flights' ){  return domEl.innerHTML = theContent[theRoute] }
+
+	if( theRoute === 'carpools' ){
+	// return  domEl.innerHTML = theContent[theRoute] }
+	$.getJSON('http://apis.is/rides/samferda-drivers/')
+		.then(function(serverRes){
+			var htmlStr = `<div class="title-div">
+											<h1>Carpools</h1>
+										</div>
+			`
+			htmlStr +=`<table class =“table table-carpools”>
+
+									 <thead>
+									 <tr>
+									 <td>Time of Departure</td>
+									 <td>From</td>
+									 <td>To</td>
+									 </tr>
+									 </thead>`
+
+			serverRes.results.forEach (function (carpoolObj){
+				console.log(carpoolObj)
+
+				// htmlStr += `<div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4>
+
+
+			htmlStr +=	`<table>
+									<tbody>
+									<tr>
+										<td>${carpoolObj.time}</td>
+											<td>${carpoolObj.from}</td>
+												<td>${carpoolObj.to}</td>
+
+									</tr>
+									</tbody>
+
+									</table>`
+
+									})
+
+			carpoolContainerEl.innerHTML = htmlStr
+	})
+
+	var carpoolContainerEl = document.querySelector('.page-content')
+}
+
+
+	if( theRoute === 'flights' ){
+		// return domEl.innerHTML = theContent[theRoute] }
+		var fetchArrivalsPromise = $.getJSON(`http://apis.is/flight?language=en&type=arrivals`)
+		var fetchDeparturesPromise = $.getJSON(`http://apis.is/flight?language=en&type=departures`)
+		$.when(fetchArrivalsPromise, fetchDeparturesPromise).then(function(arrivalsData, departureData){
+
+
+				var htmlStr = `<div class="title-div">
+												<h1>Flights</h1>
+											</div>
+				`
+				htmlStr +=`<table class =“table table-carpools”>
+
+										 <thead>
+										 <tr>
+										 <td>Time of Departure</td>
+										 <td>From</td>
+										 <td>To</td>
+										 </tr>
+										 </thead>`
+
+				serverRes.results.forEach (function (flightObj){
+
+					// htmlStr += `<div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4>
+
+
+				htmlStr +=	`<table>
+												<tbody>
+													<tr>
+																	<td>${flightObj.arrivalsData.date}</td>
+																	<td>${flightObj.arrivalsData.plannedArrival}</td>
+																	<td>${flightObj.arrivalsData.from}</td>
+																	<td>${flightObj.arrivalsData.airline}</td>
+													</tr>
+										</tbody>
+
+										</table>`
+
+				htmlStr +=	`<table>
+												<tbody>
+														<tr>
+																	<td>${flightObj.departureData.date}</td>
+																	<td>${flightObj.departureData.plannedArrival}</td>
+																	<td>${flightObj.departureData.from}</td>
+																	<td>${flightObj.departureData.airline}</td>
+														</tr>
+												</tbody>
+										</table>`
+										})
+
+				flightContainerEl.innerHTML = htmlStr
+		})
+
+		var flightContainerEl = document.querySelector('.page-content')
+	}
+
 
 	domEl.innerHTML = theContent.home
 
