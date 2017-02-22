@@ -143,10 +143,12 @@ function renderContentTo(domEl, theRoute, theContent){
 				htmlStr +=`<table class =“table table-flights>
 
 										 <thead>
+										 <tr><h3>Arrivals</h3></tr>
 										<tr>
-											 <th>Time of Departure</th>
-											 <th>From</th>
-											 <th>To</th>
+											 <th>Date</th>
+											 <th>Arrival Time</th>
+											 <th>Origin</th>
+											 <th>Airline</th>
 										 </tr>
 										 </thead>
 										 <tbody>`
@@ -180,6 +182,32 @@ function renderContentTo(domEl, theRoute, theContent){
 				htmlStr += `<tbody>
 										</table>`
 
+				htmlStr +=`<table class =“table table-flights>
+
+																 <thead>
+																<tr>
+																	 <th>Date</th>
+																	 <th>Departure Time</th>
+																	 <th>Destination</th>
+																	 <th>Airline</th>
+																 </tr>
+																 </thead>
+																 <tbody>`
+
+										departureData[0].results.forEach (function (flightObj){
+											console.log (flightObj)
+
+										htmlStr +=	`
+																	<tr>
+																				<td>${flightObj.date}</td>
+																				<td>${flightObj.plannedArrival}</td>
+																				<td>${flightObj.from}</td>
+																				<td>${flightObj.airline}</td>
+																	</tr>
+																`
+																})
+										htmlStr += `<tbody>
+																</table>`
 
 				flightContainerEl.innerHTML = htmlStr
 		})
@@ -211,13 +239,3 @@ controllerRouter()
 window.addEventListener('hashchange', controllerRouter)
 
 				//
-				// htmlStr +=	`<table>
-				// 								<tbody>
-				// 										<tr>
-				// 													<td>${flightsObj.departureData.date}</td>
-				// 													<td>${flightsObj.departureData.plannedArrival}</td>
-				// 													<td>${flightsObj.departureData.from}</td>
-				// 													<td>${flightsObj.departureData.airline}</td>
-				// 										</tr>
-				// 								</tbody>
-				// 						</table>`
