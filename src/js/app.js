@@ -55,6 +55,8 @@ function renderContentTo(domEl, theRoute, theContent){
 	console.log(theRoute)
 	if( theRoute === 'home' ){  return domEl.innerHTML = theContent[theRoute] }
 
+
+//Concerts Section//
 	if( theRoute === 'concerts' ){
 		console.log(theRoute)
 		$.getJSON('http://apis.is/concerts')
@@ -65,62 +67,50 @@ function renderContentTo(domEl, theRoute, theContent){
 				`
 				serverRes.results.forEach (function (singleObj){
 					console.log(singleObj)
-					// htmlStr += `<div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4>
-							htmlStr
 							htmlStr += `<div class="concert-image"><img src="${singleObj.imageSource}"></div>`
 							htmlStr += `<div class ="concert-name">${singleObj.eventDateName}</div>`
 							htmlStr += `<div class="concert-venue"><span class="venue-name">Venue: </span>${singleObj.eventHallName}</div>`
 							htmlStr += `<div class="concert-date">"${singleObj.dateOfShow}"</div>`
 											// </div>`
 										})
-
-
-
 				concertContainerEl.innerHTML = htmlStr
 		})
-
-
 				var concertContainerEl = document.querySelector('.page-content')
 	}
 
-
+//Carpools Section//
 	if( theRoute === 'carpools' ){
-	// return  domEl.innerHTML = theContent[theRoute] }
 	$.getJSON('http://apis.is/rides/samferda-drivers/')
 		.then(function(serverRes){
 			var htmlStr = `<div class="title-div">
 											<h1>Carpools</h1>
-										</div>
-			`
-			htmlStr +=`<table class =“table table-carpools”>
 
+
+			<table class =“table table-carpools”>
 									 <thead>
 									 <tr>
-									 <td>Time of Departure</td>
-									 <td>From</td>
-									 <td>To</td>
+											 <th>Time of Departure</th>
+											 <th>From</th>
+											 <th>To</th>
 									 </tr>
-									 </thead>`
+									 </thead>
+									 <tbody>`
 
 			serverRes.results.forEach (function (carpoolObj){
 				console.log(carpoolObj)
 
-				// htmlStr += `<div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4>
 
-
-			htmlStr +=	`<table>
-									<tbody>
+			htmlStr +=	`
 									<tr>
 										<td>${carpoolObj.time}</td>
 											<td>${carpoolObj.from}</td>
 												<td>${carpoolObj.to}</td>
 
-									</tr>
-									</tbody>
-
-									</table>`
-
-									})
+									</tr>`
+								})
+		htmlStr += `<tbody>
+								</table>
+								</div>`
 
 			carpoolContainerEl.innerHTML = htmlStr
 	})
@@ -128,9 +118,8 @@ function renderContentTo(domEl, theRoute, theContent){
 	var carpoolContainerEl = document.querySelector('.page-content')
 }
 
-
+//Flights Section//
 	if( theRoute === 'flights' ){
-		// return domEl.innerHTML = theContent[theRoute] }
 		var fetchArrivalsPromise = $.getJSON(`http://apis.is/flight?language=en&type=arrivals`)
 		var fetchDeparturesPromise = $.getJSON(`http://apis.is/flight?language=en&type=departures`)
 		$.when(fetchArrivalsPromise, fetchDeparturesPromise).then(function(arrivalsData, departureData){
@@ -185,6 +174,8 @@ function renderContentTo(domEl, theRoute, theContent){
 				htmlStr +=`<table class =“table table-flights>
 
 																 <thead>
+																 <tr><h3>Departures</h3></tr>
+																<tr>
 																<tr>
 																	 <th>Date</th>
 																	 <th>Departure Time</th>
@@ -201,7 +192,7 @@ function renderContentTo(domEl, theRoute, theContent){
 																	<tr>
 																				<td>${flightObj.date}</td>
 																				<td>${flightObj.plannedArrival}</td>
-																				<td>${flightObj.from}</td>
+																				<td>${flightObj.to}</td>
 																				<td>${flightObj.airline}</td>
 																	</tr>
 																`
@@ -237,5 +228,3 @@ tabsContainerEl.addEventListener('click', function(evt){
 
 controllerRouter()
 window.addEventListener('hashchange', controllerRouter)
-
-				//

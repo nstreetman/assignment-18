@@ -55,23 +55,41 @@ div .background-img {
 }
 
 //Table formatting
-.title-div {
+
+th {
+    border-bottom: 2px solid rgba(180, 180, 180, 0.8);
+}
+
+td {
+    border-bottom: 1px solid rgba(180, 180, 180, 0.8);
+}
+.title-div{
+	width: 80%;
+	background-color: rgba(255, 255, 255, 0.5);
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 25px;
+	padding-right: 25px;
+	border-left: : 2px solid #000;
+	border-right: 2px solid #000;
+	border-bottom: 2px solid #000;
+}
+
+.title-div h1{
 	background-color: rgba(242, 186, 214, 0.8);
-	font-size: 18px;
+	font-size: 28px;
 	font-family: 'Roboto', sans-serif;
 	font-weight: 100;
 }
-
-// table{
-// 	background-color: rgba(255, 255, 255, 0.1);
-// }
-.table-carpools tbody {
-	column-width: 500px;
+table {
+	width: 100%;
+	align-self: center;
 }
 
-.td {
-	border: 1px solid black;
+th {
+	text-align: left;
 }
+
 
 //cool full background image code found at https://css-tricks.com/perfect-full-page-background-image/
 
