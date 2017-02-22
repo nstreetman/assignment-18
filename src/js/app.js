@@ -10,6 +10,7 @@ import $ from 'jquery'
 
 var pageContentObj = {
 	home:  `
+				<div class="title-div">
 				<table class =“table table-home”>
 				  <thead>
 				    <tr><th><h3>The Basic Facts</h3></th> </tr>
@@ -33,6 +34,7 @@ var pageContentObj = {
 				    </tr>
 				  </tbody>
 				</table>
+				</div>
 					`,
 
 	concerts: 'concerts',
