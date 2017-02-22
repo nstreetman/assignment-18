@@ -143,14 +143,15 @@ function renderContentTo(domEl, theRoute, theContent){
 				htmlStr +=`<table class =“table table-flights>
 
 										 <thead>
-										 <tr>
-										 <td>Time of Departure</td>
-										 <td>From</td>
-										 <td>To</td>
+										<tr>
+											 <th>Time of Departure</th>
+											 <th>From</th>
+											 <th>To</th>
 										 </tr>
-										 </thead>`
+										 </thead>
+										 <tbody>`
 
-				arrivalsData.departureData.results.forEach (function (flightsObj){
+				arrivalsData[0].results.forEach (function (flightObj){
 					console.log (flightObj)
 
 					// <table class =“table table-flights”>
@@ -167,29 +168,18 @@ function renderContentTo(domEl, theRoute, theContent){
 					//
 					// </table>
 
-				htmlStr +=	`<table>
-												<tbody>
-													<tr>
-																	<td>${flightsObj.arrivalsData.date}</td>
-																	<td>${flightsObj.arrivalsData.plannedArrival}</td>
-																	<td>${flightsObj.arrivalsData.from}</td>
-																	<td>${flightsObj.arrivalsData.airline}</td>
-													</tr>
-										</tbody>
-
-										</table>`
-
-				htmlStr +=	`<table>
-												<tbody>
-														<tr>
-																	<td>${flightsObj.departureData.date}</td>
-																	<td>${flightsObj.departureData.plannedArrival}</td>
-																	<td>${flightsObj.departureData.from}</td>
-																	<td>${flightsObj.departureData.airline}</td>
-														</tr>
-												</tbody>
-										</table>`
+				htmlStr +=	`
+											<tr>
+													<td>${flightObj.date}</td>
+													<td>${flightObj.plannedArrival}</td>
+													<td>${flightObj.from}</td>
+													<td>${flightObj.airline}</td>
+											</tr>
+										`
 										})
+				htmlStr += `<tbody>
+										</table>`
+
 
 				flightContainerEl.innerHTML = htmlStr
 		})
@@ -219,3 +209,15 @@ tabsContainerEl.addEventListener('click', function(evt){
 
 controllerRouter()
 window.addEventListener('hashchange', controllerRouter)
+
+				//
+				// htmlStr +=	`<table>
+				// 								<tbody>
+				// 										<tr>
+				// 													<td>${flightsObj.departureData.date}</td>
+				// 													<td>${flightsObj.departureData.plannedArrival}</td>
+				// 													<td>${flightsObj.departureData.from}</td>
+				// 													<td>${flightsObj.departureData.airline}</td>
+				// 										</tr>
+				// 								</tbody>
+				// 						</table>`
