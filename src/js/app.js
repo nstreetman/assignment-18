@@ -37,22 +37,7 @@ var pageContentObj = {
 
 	concerts: 'concerts',
 	carpools: 'carpool',
-	//
-	flights:  `
-				<table class =“table table-flights”>
-
-				<thead>
-					<tr><h2>Flights</h2></tr>
-				</thead>
-				<tbody>
-				<tr>
-					<td>Coming Soon!</td>
-
-				</tr>
-				</tbody>
-
-				</table>
-			`
+	flights:  `flights`
 }
 
 var tabsContainerEl = document.querySelector(".nav-tabs")
@@ -83,7 +68,7 @@ function renderContentTo(domEl, theRoute, theContent){
 					// htmlStr += `<div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4>
 							htmlStr
 							htmlStr += `<div class="concert-image"><img src="${singleObj.imageSource}"></div>`
-							htmlStr += `<div class ="concert-name">${singleObj.name}</div>`
+							htmlStr += `<div class ="concert-name">${singleObj.eventDateName}</div>`
 							htmlStr += `<div class="concert-venue"><span class="venue-name">Venue: </span>${singleObj.eventHallName}</div>`
 							htmlStr += `<div class="concert-date">"${singleObj.dateOfShow}"</div>`
 											// </div>`
@@ -149,13 +134,13 @@ function renderContentTo(domEl, theRoute, theContent){
 		var fetchArrivalsPromise = $.getJSON(`http://apis.is/flight?language=en&type=arrivals`)
 		var fetchDeparturesPromise = $.getJSON(`http://apis.is/flight?language=en&type=departures`)
 		$.when(fetchArrivalsPromise, fetchDeparturesPromise).then(function(arrivalsData, departureData){
-
-
+			console.log('arrivalsData', arrivalsData[0])
+				console.log('departureData', departureData[0])
 				var htmlStr = `<div class="title-div">
-												<h1>Flights</h1>
+												<p>Flights</p>
 											</div>
 				`
-				htmlStr +=`<table class =“table table-carpools”>
+				htmlStr +=`<table class =“table table-flights>
 
 										 <thead>
 										 <tr>
@@ -165,18 +150,30 @@ function renderContentTo(domEl, theRoute, theContent){
 										 </tr>
 										 </thead>`
 
-				serverRes.results.forEach (function (flightObj){
+				arrivalsData.departureData.results.forEach (function (flightsObj){
+					console.log (flightObj)
 
-					// htmlStr += `<div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4>
-
+					// <table class =“table table-flights”>
+					// Leftover html from routing section
+					// <thead>
+					// 	<tr><h2>Flights</h2></tr>
+					// </thead>
+					// <tbody>
+					// <tr>
+					// 	<td>Coming Soon!</td>
+					//
+					// </tr>
+					// </tbody>
+					//
+					// </table>
 
 				htmlStr +=	`<table>
 												<tbody>
 													<tr>
-																	<td>${flightObj.arrivalsData.date}</td>
-																	<td>${flightObj.arrivalsData.plannedArrival}</td>
-																	<td>${flightObj.arrivalsData.from}</td>
-																	<td>${flightObj.arrivalsData.airline}</td>
+																	<td>${flightsObj.arrivalsData.date}</td>
+																	<td>${flightsObj.arrivalsData.plannedArrival}</td>
+																	<td>${flightsObj.arrivalsData.from}</td>
+																	<td>${flightsObj.arrivalsData.airline}</td>
 													</tr>
 										</tbody>
 
@@ -185,10 +182,10 @@ function renderContentTo(domEl, theRoute, theContent){
 				htmlStr +=	`<table>
 												<tbody>
 														<tr>
-																	<td>${flightObj.departureData.date}</td>
-																	<td>${flightObj.departureData.plannedArrival}</td>
-																	<td>${flightObj.departureData.from}</td>
-																	<td>${flightObj.departureData.airline}</td>
+																	<td>${flightsObj.departureData.date}</td>
+																	<td>${flightsObj.departureData.plannedArrival}</td>
+																	<td>${flightsObj.departureData.from}</td>
+																	<td>${flightsObj.departureData.airline}</td>
 														</tr>
 												</tbody>
 										</table>`
