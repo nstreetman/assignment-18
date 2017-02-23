@@ -69,10 +69,12 @@ function renderContentTo(domEl, theRoute, theContent){
 				`
 				serverRes.results.forEach (function (singleObj){
 					console.log(singleObj)
+							htmlStr += `<div class="container-single-concert">`
 							htmlStr += `<div class="concert-image"><img src="${singleObj.imageSource}"></div>`
-							htmlStr += `<div class ="concert-name">${singleObj.eventDateName}</div>`
-							htmlStr += `<div class="concert-venue"><span class="venue-name">Venue: </span>${singleObj.eventHallName}</div>`
-							htmlStr += `<div class="concert-date">"${singleObj.dateOfShow}"</div>`
+							htmlStr += `<div class="concert-name">${singleObj.eventDateName}</div>`
+							htmlStr += `<div class="concert-venue"><span class="venue-name"><mark>Venue:</mark> </span>${singleObj.eventHallName}</div>`
+							htmlStr += `<div class="concert-date">${singleObj.dateOfShow}</div>`
+							htmlStr += `</div>`
 										})
 							htmlStr += `</div>`
 				concertContainerEl.innerHTML = htmlStr
