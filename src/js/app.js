@@ -10,10 +10,11 @@ import $ from 'jquery'
 
 var pageContentObj = {
 	home:  `
-				<div class="title-div">
+				<div class="title-div container-div">
+				<h1>The Basic Facts</h1>
 				<table class =“table table-home”>
 				  <thead>
-				    <tr><th><h3>The Basic Facts</h3></th> </tr>
+
 				  </thead>
 				  <tbody>
 				    <tr>
@@ -63,9 +64,8 @@ function renderContentTo(domEl, theRoute, theContent){
 		console.log(theRoute)
 		$.getJSON('http://apis.is/concerts')
 			.then(function(serverRes){
-				var htmlStr = `<div class="title-div">
+				var htmlStr = `<div class="title-div container-div container-concerts">
 												<h1>Concerts</h1>
-											</div>
 				`
 				serverRes.results.forEach (function (singleObj){
 					console.log(singleObj)
@@ -73,8 +73,8 @@ function renderContentTo(domEl, theRoute, theContent){
 							htmlStr += `<div class ="concert-name">${singleObj.eventDateName}</div>`
 							htmlStr += `<div class="concert-venue"><span class="venue-name">Venue: </span>${singleObj.eventHallName}</div>`
 							htmlStr += `<div class="concert-date">"${singleObj.dateOfShow}"</div>`
-											// </div>`
 										})
+							htmlStr += `</div>`
 				concertContainerEl.innerHTML = htmlStr
 		})
 				var concertContainerEl = document.querySelector('.page-content')
@@ -84,7 +84,7 @@ function renderContentTo(domEl, theRoute, theContent){
 	if( theRoute === 'carpools' ){
 	$.getJSON('http://apis.is/rides/samferda-drivers/')
 		.then(function(serverRes){
-			var htmlStr = `<div class="title-div">
+			var htmlStr = `<div class="title-div container-div">
 											<h1>Carpools</h1>
 
 
@@ -107,10 +107,9 @@ function renderContentTo(domEl, theRoute, theContent){
 										<td>${carpoolObj.time}</td>
 											<td>${carpoolObj.from}</td>
 												<td>${carpoolObj.to}</td>
-
 									</tr>`
 								})
-		htmlStr += `<tbody>
+		htmlStr += `</tbody>
 								</table>
 								</div>`
 
@@ -125,42 +124,28 @@ function renderContentTo(domEl, theRoute, theContent){
 		var fetchArrivalsPromise = $.getJSON(`http://apis.is/flight?language=en&type=arrivals`)
 		var fetchDeparturesPromise = $.getJSON(`http://apis.is/flight?language=en&type=departures`)
 		$.when(fetchArrivalsPromise, fetchDeparturesPromise).then(function(arrivalsData, departureData){
-			console.log('arrivalsData', arrivalsData[0])
-				console.log('departureData', departureData[0])
-				var htmlStr = `<div class="title-div">
-												<p>Flights</p>
-											</div>
-				`
-				htmlStr +=`<table class =“table table-flights>
+			// console.log('arrivalsData', arrivalsData[0])
+			// 	console.log('departureData', departureData[0])
 
-										 <thead>
-										 <tr><h3>Arrivals</h3></tr>
-										<tr>
-											 <th>Date</th>
-											 <th>Arrival Time</th>
-											 <th>Origin</th>
-											 <th>Airline</th>
-										 </tr>
-										 </thead>
-										 <tbody>`
+				var htmlStr = `<div class="container-flights container-div">
+														<div class="title-div">
+															<h1>Flights</h1>
+														</div>
+
+														<table class="table-flights">
+										 			<thead>
+													 <tr><h3>Arrivals</h3></tr>
+													<tr>
+														 <th>Date</th>
+														 <th>Arrival Time</th>
+														 <th>Origin</th>
+														 <th>Airline</th>
+													 </tr>
+													 </thead>
+													 <tbody>`
 
 				arrivalsData[0].results.forEach (function (flightObj){
 					console.log (flightObj)
-
-					// <table class =“table table-flights”>
-					// Leftover html from routing section
-					// <thead>
-					// 	<tr><h2>Flights</h2></tr>
-					// </thead>
-					// <tbody>
-					// <tr>
-					// 	<td>Coming Soon!</td>
-					//
-					// </tr>
-					// </tbody>
-					//
-					// </table>
-
 				htmlStr +=	`
 											<tr>
 													<td>${flightObj.date}</td>
@@ -170,16 +155,14 @@ function renderContentTo(domEl, theRoute, theContent){
 											</tr>
 										`
 										})
-				htmlStr += `<tbody>
+				htmlStr += `</tbody>
 										</table>`
 
-				htmlStr +=`<table class =“table table-flights>
-
-																 <thead>
-																 <tr><h3>Departures</h3></tr>
+				htmlStr +=`<table class='table-flights'>
+														<thead>
+													 <tr><h3>Departures</h3></tr>
 																<tr>
-																<tr>
-																	 <th>Date</th>
+																	<th>Date</th>
 																	 <th>Departure Time</th>
 																	 <th>Destination</th>
 																	 <th>Airline</th>
@@ -201,7 +184,7 @@ function renderContentTo(domEl, theRoute, theContent){
 																})
 										htmlStr += `<tbody>
 																</table>`
-
+										htmlStr += `</div>`
 				flightContainerEl.innerHTML = htmlStr
 		})
 

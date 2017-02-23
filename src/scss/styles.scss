@@ -54,18 +54,28 @@ div .background-img {
 	//Thank you, Stack Overflow for introducing me to z-index!
 }
 
-//Table formatting
+/////////Concerts formatting///////////
+
+/////////Table formatting///////////
+table {
+	width: 100%;
+	align-self: center;
+	font-family: 'Open Sans', sans-serif;
+}
+
 
 th {
     border-bottom: 2px solid rgba(180, 180, 180, 0.8);
+		text-align: left;
 }
 
 td {
     border-bottom: 1px solid rgba(180, 180, 180, 0.8);
 }
-.title-div{
-	width: 80%;
-	background-color: rgba(255, 255, 255, 0.5);
+
+.container-div {
+	width: 90%;
+	background-color: rgba(255, 255, 255, 0.7);
 	margin-left: auto;
 	margin-right: auto;
 	padding-top: 10px;
@@ -81,18 +91,34 @@ td {
 	font-size: 28px;
 	font-family: 'Roboto', sans-serif;
 	font-weight: 100;
+	padding: 2px;
 }
-table {
-	width: 100%;
-	align-self: center;
+.container-flights {
+	display: inline-block;
+ 	width: 90%;
+	margin-left: 50px;
+
+}
+ .container-flights h3 {
+	background-color: rgba(109, 148, 232, 0.67);
+	font-size: 20px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 100;
+	padding: 2px;
+	width: 250px;
+	display: inline;
 }
 
-th {
-	text-align: left;
+.table-flights {
+	display: inline;
+	width: 50%;
+	vertical-align: top;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
 }
 
 
-//cool full background image code found at https://css-tricks.com/perfect-full-page-background-image/
+//full background image code found at https://css-tricks.com/perfect-full-page-background-image/
 
 html {
   background: url("../../dist/images/Light_Blue_Flag_of_Iceland.png") no-repeat center center fixed;
