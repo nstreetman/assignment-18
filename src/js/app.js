@@ -130,10 +130,11 @@ function renderContentTo(domEl, theRoute, theContent){
 			// 	console.log('departureData', departureData[0])
 
 				var htmlStr = `<div class="container-flights container-div">
+
 														<div class="title-div">
 															<h1>Flights</h1>
 														</div>
-
+														<div class="container-arrivals">
 														<table class="table-flights">
 										 			<thead>
 													 <tr><h3>Arrivals</h3></tr>
@@ -158,9 +159,11 @@ function renderContentTo(domEl, theRoute, theContent){
 										`
 										})
 				htmlStr += `</tbody>
-										</table>`
+										</table>
+										</div>`
 
-				htmlStr +=`<table class='table-flights'>
+				htmlStr +=`<div class="container-departures">
+													<table class='table-flights'>
 														<thead>
 													 <tr><h3>Departures</h3></tr>
 																<tr>
@@ -185,7 +188,8 @@ function renderContentTo(domEl, theRoute, theContent){
 																`
 																})
 										htmlStr += `<tbody>
-																</table>`
+																</table>
+																</div>`
 										htmlStr += `</div>`
 				flightContainerEl.innerHTML = htmlStr
 		})
