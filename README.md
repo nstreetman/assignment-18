@@ -23,6 +23,16 @@ no API key necessary
 ###Normal Mode
 
 Implement hash routing to render the UI
+##Roadmap to Success
+
+Build a router function that will render a simple view in the #app-container element based on what is in the hash.
+Have your router execute a $.getJSON(...) request that fetches data from the appropriate URL endpoint
+In your promise handler, iterate over the data and render something simple to the page $.getJSON.then(...)
+Build static-HTML with dummy data for a given route to make sure the layout is operational.
+Create the HTML dynamically based on the data returned from the server -- this will certainly require iterating over some array of objects returned by the API server.
+Put event-listeners on the nav-button elements to highlight and show which route is active. You will need to implement the DOM logic that applies the correct class-names for when
+(A) the application starts
+(B) a user navigates by clicking a button
 
 
 
