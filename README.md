@@ -1,26 +1,29 @@
-#Simple Build - ES6 + SCSS
+#Intro to Routing and Views with Data
 
-Lightweight scaffolding and build tool to quickly and easily integrate a ES6 and SCSS.
+##Objectives
 
-  - transpiles scss into css
-  - transpiles es6 nto es5
-  - concatenates all required/imported modules together into a `dist/` directory
+Effectively implement the promise pattern for fetching data asynchronously.
+Format retrieved data into HTML
+Primary objective is routing + fetching + rendering data to page. Styles are of secondary importance.
+Use window.location.hash and an event-listener on the hashchange event to implement client-side routing.
+Implement UI-logic that changes the hash base on user interactions.
+##Setup
 
-##Getting started
+use the (simple-build-scss-scss)[https://github.com/t3tools/simple-build-es6-scss] tool to create a new web project. (Instructions in the link)
+cd into the project
+npm install to install project dependencies
+npm start to start the watcher
+import jQuery into your app.js
+hack away at your app.js to create the u.i. below.
+it is highly recommended that you use bootstrap for the grid and the table styles.
+##Resources
 
-  - **starting inside the root of the project-directory** clone this repo with `git clone git@github.com:t3tools/simple-build-es6-scss.git «your-project-name»`
-  - disconnect from my remote repo and point to your own
-    - `git remote remove origin`
-    - `git remote add origin «url-to-your-repo»`
-  - `npm install`
-  - `npm run go`
-  - that's it! open the `index.html` file and see your changes
+Iceland API Documentation: http://docs.apis.is/
+no API key necessary
+###Normal Mode
 
-##Workflow
-  - all assets (CSS, JS, and images) are served from the `/dist` folder
-  - you'll *only* write CSS and JS code in the files in the `/src` folder
+Implement hash routing to render the UI
 
-##Publishing
-  - add, commit and push per usual
+
 
   
